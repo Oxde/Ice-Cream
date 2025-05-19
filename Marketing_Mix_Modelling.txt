@@ -1,0 +1,21 @@
+Challenge 2:
+Measuring the effect of marketing campaigns with Marketing Mix Modelling
+
+Introduction
+One of the most asked questions we get at Group M is “How much should we invest in our media channels?” and “What return on media investment can we expect?”. Marketing Mix Modelling (MMM) uses statistical analysis of historical sales and media‑spend data to build a response model that links marketing activity to sales outcomes. The model can be used to estimate the impact of investment in each of your media channels, as well as forecast sales at different budget levels. It’s a key tool in the marketer’s toolkit to quantify the value of media spend, allocate budget across channels and optimise the overall marketing plan.
+
+The company
+We are Group M, the world’s leading media‑investment group, with a mission to shape a new era of media. Advertising works better for people through the Group’s scale, expertise, and innovation. We connect behaviours, drivers, audiences, and impact through data and technology, and reinvent media investment for our clients.
+
+Our pillars:
+- People – driving audience and ROI
+- Innovation – fostering new ideas and approaches
+- Collaboration – working together to solve challenges
+- Optimisation – driving efficiency and results
+
+The assignment
+You will be working on Marketing Mix Modelling, a data‑science technique for measuring the effectiveness of advertising spending on KPIs (key performance indicators, e.g. sales). You will be given two years of historical advertising‑spend and sales data from one of our clients. This data comprises ad levels of different advertising channels, both offline (TV and Radio) and online (Display, Video, Social). The goal is to create a model that can accurately predict the sales for our client and give them a suggestion on how they should spend their budget in the next year. You can choose any type of model you like. And when we give you a dataset, you can also tell us which features might limit your model. In fact, we encourage you to think about what could affect our client’s sales, and find additional data that might help in making your model more accurate!
+
+Bonus
+What is Group M?
+Group M makes advertising work better for people.
