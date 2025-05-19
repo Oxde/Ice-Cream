@@ -4,8 +4,36 @@ This project provides a two-step workflow to convert raw Excel (.xlsx) files int
 
 ## Prerequisites
 
-- Python 3.x
-- pandas library (`pip install pandas openpyxl`)
+- Python 3.x (it is recommended to use a virtual environment)
+- Required Python packages (see `requirements.txt`)
+
+## Setup
+
+1.  **Clone the repository (if applicable) or download the project files.**
+
+2.  **Navigate to the project root directory in your terminal.**
+
+3.  **Create a Python virtual environment:**
+    ```bash
+    python3 -m venv venv
+    ```
+    (On some systems, you might need to use `python` instead of `python3`)
+
+4.  **Activate the virtual environment:**
+    -   On macOS and Linux:
+        ```bash
+        source venv/bin/activate
+        ```
+    -   On Windows:
+        ```bash
+        .\venv\Scripts\activate
+        ```
+    You should see `(venv)` at the beginning of your terminal prompt, indicating the virtual environment is active.
+
+5.  **Install the required packages:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ## Directory Structure
 
