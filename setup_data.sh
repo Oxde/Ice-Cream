@@ -78,6 +78,11 @@ fi
 print_info "Setting up data directory structure..."
 mkdir -p data/{raw,interim,processed,explanations}
 print_status "Data directories created"
+print_info "Directory structure:"
+echo "   data/raw/        - Place your original data files here"
+echo "   data/interim/    - Cleaned data (generated automatically)"
+echo "   data/processed/  - Final unified datasets (generated automatically)"
+echo "   data/explanations/ - Data documentation"
 
 # Check if raw data exists
 if [ ! "$(ls -A data/raw/ 2>/dev/null)" ]; then

@@ -129,6 +129,49 @@ The script will:
 
 ### 🔧 Manual Setup (Step by Step)
 
+#### **Using VS Code + Conda + Jupyter (Recommended)**
+
+This is the setup you're currently using and it works great for data science!
+
+```bash
+# 1. Clone the repository
+git clone git@github.com:Oxde/Ice-Cream.git
+cd Ice-Cream
+
+# 2. Create conda environment (if you haven't already)
+conda create -n icecream-mmm python=3.9
+conda activate icecream-mmm
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Open in VS Code
+code .
+```
+
+**In VS Code:**
+1. **Select Python Interpreter**: 
+   - `Cmd+Shift+P` → "Python: Select Interpreter"
+   - Choose your conda environment: `~/anaconda3/envs/icecream-mmm/bin/python`
+
+2. **Jupyter Extension**:
+   - Install "Jupyter" extension in VS Code
+   - Notebooks will open directly in VS Code interface
+
+3. **Run Notebooks**:
+   - Open `.ipynb` files directly in VS Code
+   - Click "Run All" or run cells individually
+   - Kernel should automatically detect your conda environment
+
+**Advantages of this setup:**
+- ✅ All-in-one environment (code + notebooks + terminal)
+- ✅ Excellent debugging and IntelliSense
+- ✅ Git integration built-in
+- ✅ Easy environment management with conda
+- ✅ Professional development experience
+
+#### **Alternative Setup Options**
+
 ### 1. Environment Setup
 ```bash
 # Create virtual environment
