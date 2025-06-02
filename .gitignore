@@ -11,10 +11,15 @@ archive/
 
 # Data files - NEVER commit data to git
 # -----------------------------------------------------------------------------
-data/raw/
-data/interim/
-data/processed/
-data/external/
+data/raw/*
+data/interim/*
+data/processed/*
+data/external/*
+
+# Allow .gitkeep files to preserve directory structure
+!data/*/.gitkeep
+
+# Data file extensions
 *.csv
 *.xlsx
 *.xls
