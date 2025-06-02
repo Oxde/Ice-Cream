@@ -106,6 +106,29 @@ When creating new hypothesis tests:
 
 ## 🚀 Getting Started
 
+### ⚡ Quick Start (Automated)
+**For fast setup, use our automated script:**
+```bash
+# 1. Navigate to project directory
+cd /Users/nikmarf/IceCream
+
+# 2. Place your raw data files in data/raw/
+# (sales_data.csv, media_spend.xlsx, etc.)
+
+# 3. Run the automated setup script
+./setup_data.sh
+```
+
+The script will:
+- ✅ Check and activate virtual environment
+- ✅ Install missing dependencies
+- ✅ Run data cleaning (`00_basic_cleaning.ipynb`)
+- ✅ Run data unification (`01b_data_unification_dual.ipynb`) 
+- ✅ Validate data quality
+- ✅ Optionally run EDA analysis
+
+### 🔧 Manual Setup (Step by Step)
+
 ### 1. Environment Setup
 ```bash
 # Create virtual environment
@@ -133,6 +156,49 @@ jupyter notebook notebooks/01b_data_unification_dual.ipynb
 # Run the enhanced MMM model
 jupyter notebook notebooks/04_mmm_enhanced.ipynb
 ```
+
+## 🔧 Troubleshooting
+
+### 🤖 **Automated Script Issues**
+**Script won't run**:
+```bash
+# Make sure script is executable
+chmod +x setup_data.sh
+
+# Run with explicit bash
+bash setup_data.sh
+```
+
+**"Permission denied"**:
+```bash
+# Fix permissions
+chmod 755 setup_data.sh
+```
+
+**"Virtual environment not found"**:
+```bash
+# Create virtual environment first
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+**"Notebook execution failed"**:
+- Check if data files are in `data/raw/`
+- Ensure data files are not corrupted
+- Run notebooks manually to see specific errors
+- Check Python package versions
+
+### 📊 **Data Issues**
+**"No raw data found"**:
+- Place your data files in `data/raw/` directory
+- Supported formats: `.csv`, `.xlsx`, `.xls`
+- Ensure files have proper column headers
+
+**"Date parsing errors"**:
+- Check date formats in your data
+- Common formats: `YYYY-MM-DD`, `MM/DD/YYYY`, `DD/MM/YYYY`
+- Ensure no missing dates in time series
 
 ## 🔑 Key Insights & Learnings
 
