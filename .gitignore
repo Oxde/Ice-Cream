@@ -1,0 +1,205 @@
+# =============================================================================
+# Ice Cream MMM Project - Git Ignore Configuration
+# =============================================================================
+
+# Previous version and backup directories
+# -----------------------------------------------------------------------------
+previous_version/
+old_version/
+backup/
+archive/
+
+# Data files - NEVER commit data to git
+# -----------------------------------------------------------------------------
+data/raw/
+data/interim/
+data/processed/
+data/external/
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Model artifacts and outputs
+# -----------------------------------------------------------------------------
+models/
+outputs/
+*.joblib
+*.model
+
+# Jupyter Notebook checkpoints and outputs
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# Python cache and bytecode
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+# -----------------------------------------------------------------------------
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# Environment variables and secrets
+# -----------------------------------------------------------------------------
+.env.local
+.env.development
+.env.test
+.env.production
+secrets.json
+config.json
+*.key
+
+# IDE and editor files
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Operating System files
+# -----------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Logs and temporary files
+# -----------------------------------------------------------------------------
+*.log
+logs/
+temp/
+tmp/
+*.tmp
+
+# Database files
+# -----------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+
+# R files (if any)
+# -----------------------------------------------------------------------------
+.RData
+.Rhistory
+.Rapp.history
+
+# Documentation builds
+# -----------------------------------------------------------------------------
+docs/_build/
+site/
+
+# Coverage reports
+# -----------------------------------------------------------------------------
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Professional specific ignores
+# -----------------------------------------------------------------------------
+# Large visualization files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.svg
+
+# Exception: Keep essential documentation images
+!README_images/
+!docs/images/
+
+# Reports and outputs (optional - uncomment if you don't want to track)
+# reports/figures/
+# reports/tables/
+
+# Backup files
+# -----------------------------------------------------------------------------
+*.bak
+*.backup
+*_backup.*
+*_old.*
+
+# Compressed files
+# -----------------------------------------------------------------------------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# =============================================================================
+# END .gitignore
+# ============================================================================= 
