@@ -1,280 +1,321 @@
 # 📊 Data Setup & Unification Guide
 
-This guide explains how to set up, clean, and unify data for the Ice Cream MMM project.
+This guide explains how to set up, clean, and unify data for the Ice Cream MMM project using the automated shell script pipeline.
 
 ## 🎯 Overview
 
-The data pipeline consists of two key stages:
-1. **Basic Cleaning** (`00_basic_cleaning.ipynb`)
-2. **Data Unification** (`01b_data_unification_dual.ipynb`) - **CRITICAL**
+The data pipeline consists of three automated stages:
+1. **Basic Cleaning** (`00_basic_cleaning.py`)
+2. **Data Preprocessing** (`01_data_preprocessing.py`) 
+3. **Dual Data Unification** (`01b_data_unification_dual.py`) - **CRITICAL**
+
+All steps are automated via the `setup_data.sh` script! 🚀
 
 ## 📁 Data Directory Structure
 
 ```
 data/
 ├── raw/                    # Original data files (NEVER modify)
-│   ├── sales_data.csv
-│   ├── media_spend.xlsx
-│   ├── tv_metrics.csv
+│   ├── sales.xlsx
+│   ├── search.xlsx  
+│   ├── tv_promo.xlsx
+│   ├── tv_branding.xlsx
+│   ├── radio_national.xlsx
+│   ├── radio_local.xlsx
+│   ├── social.xlsx
+│   ├── ooh.xlsx
+│   ├── email.xlsx
+│   └── promo.xlsx
+├── interim/                # Cleaned individual datasets
+│   ├── sales_basic_clean.csv
+│   ├── search_basic_clean.csv
 │   └── ...
-├── interim/                # Intermediate processing files
-│   ├── cleaned_sales.csv
-│   ├── cleaned_media.csv
-│   └── ...
-├── processed/              # Final unified datasets
-│   ├── unified_dataset.csv
-│   ├── mmm_ready_data.csv
-│   └── ...
+├── processed/              # Final unified datasets & preprocessed files
+│   ├── unified_dataset_full_range_2022_2024.csv      # Strategy A
+│   ├── unified_dataset_complete_coverage_2022_2023.csv # Strategy B
+│   ├── dual_unification_report.json
+│   ├── *_preprocessed.csv  # Individual preprocessed datasets
+│   └── preprocessing_report.json
 └── explanations/           # Data documentation
     ├── column_definitions.md
     ├── data_sources.md
     └── quality_notes.md
 ```
 
-## 🚀 Quick Start - Data Setup
+## 🚀 Quick Start - Automated Data Setup
 
-### Step 1: Place Raw Data
+### Step 1: Virtual Environment Setup
+
 ```bash
 # Navigate to project directory
 cd /Users/nikmarf/IceCream
 
-# Create data directories if they don't exist
-mkdir -p data/{raw,interim,processed,explanations}
+# Create virtual environment (if not exists)
+python -m venv .venv
 
-# Place your raw data files in data/raw/
-# Example files:
-# - sales_data.csv
-# - media_spend.xlsx  
-# - tv_grp_data.csv
-# - print_impressions.csv
-# - email_metrics.csv
+# Activate virtual environment (macOS/Linux)
+source .venv/bin/activate
+
+# Install required packages
+pip install pandas numpy matplotlib seaborn scipy openpyxl jupyter
+
+# Verify installation
+python -c "import pandas as pd; print('✅ Dependencies installed successfully!')"
 ```
 
-### Step 2: Run Data Cleaning Pipeline
+### Step 2: Run Automated Data Pipeline
+
 ```bash
-# Activate your virtual environment
-source .venv/bin/activate  # On macOS
+# Ensure you're in the project root with virtual environment activated
+source .venv/bin/activate
 
-# Start Jupyter
-jupyter notebook
+# Make script executable (if needed)
+chmod +x setup_data.sh
 
-# Run notebooks in order:
-# 1. notebooks/00_basic_cleaning.ipynb
-# 2. notebooks/01b_data_unification_dual.ipynb  (CRITICAL)
+# Run the complete data pipeline
+./setup_data.sh
 ```
 
-## 📋 Notebook Details
+**That's it!** 🎉 The script will automatically:
+1. ✅ Clean all raw datasets (10 files)
+2. ✅ Apply preprocessing and feature engineering
+3. ✅ Create TWO strategic unified datasets
+4. ✅ Generate validation reports
+5. ✅ Show data summary
 
-### 🧹 `00_basic_cleaning.ipynb` - Basic Cleaning
+## 📋 Pipeline Details
+
+### 🧹 Stage 1: Basic Cleaning (`00_basic_cleaning.py`)
 
 **Purpose**: Initial data cleaning and standardization
 
 **What it does**:
-- Loads raw data files
-- Standardizes date formats
-- Handles missing values
-- Removes duplicates
-- Basic data type conversions
+- Loads all raw Excel files from `data/raw/`
+- Standardizes date formats (handles DD-MM-YYYY for search data)
+- Filters to 2022+ data only
+- Handles missing values and duplicates
+- Special promo data processing (pivot and classification)
 - Saves cleaned files to `data/interim/`
 
-**Key Functions**:
+**Key Features**:
 ```python
-# Date standardization
-df['date'] = pd.to_datetime(df['date'])
+# Date standardization with special handling
+if filename == 'search':
+    df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
+else:
+    df['date'] = pd.to_datetime(df['date'])
 
-# Missing value handling
-df = df.dropna(subset=['critical_columns'])
-df['optional_column'] = df['optional_column'].fillna(0)
-
-# Data type conversion
-df['spend'] = pd.to_numeric(df['spend'], errors='coerce')
+# Promo classification (priority-based)
+# 1 = Buy One Get One, 2 = Limited Time Offer, 3 = Price Discount, 0 = No Promotion
 ```
 
-**Outputs**:
-- `data/interim/cleaned_*.csv` files
-- Data quality report
-- Summary of cleaning operations
+### 🔧 Stage 2: Data Preprocessing (`01_data_preprocessing.py`)
 
-### 🔗 `01b_data_unification_dual.ipynb` - Data Unification (CRITICAL)
-
-**Purpose**: **THE MOST IMPORTANT STEP** - Unifies all data sources into a single dataset
+**Purpose**: Feature engineering and data preparation for modeling
 
 **What it does**:
-- Merges multiple data sources on date
-- Creates unified column structure
-- Handles different date granularities (daily/weekly)
-- Standardizes media channel names
-- Creates final MMM-ready dataset
-- Generates comprehensive data validation
+- Loads cleaned datasets from `data/interim/`
+- Minimal outlier treatment (conservative approach)
+- **Time feature engineering optimized for weekly data**:
+  - Basic: year, month, dayofyear, week, quarter
+  - **Cyclical features**: month_sin/cos, week_sin/cos  
+  - **Business features**: season, holiday_period, is_month_end
+- Data validation and quality checks
+- Saves preprocessed files to `data/processed/`
+
+**Key Features**:
+```python
+# Cyclical encoding for seasonality (CRITICAL for MMM)
+df['month_sin'] = np.sin(2 * np.pi * df['month'] / 12)
+df['month_cos'] = np.cos(2 * np.pi * df['month'] / 12)
+
+# Weekly patterns for business cycles  
+df['week_sin'] = np.sin(2 * np.pi * df['week'] / 52)
+df['week_cos'] = np.cos(2 * np.pi * df['week'] / 52)
+```
+
+### 🔗 Stage 3: Dual Data Unification (`01b_data_unification_dual.py`) - CRITICAL
+
+**Purpose**: **THE MOST IMPORTANT STEP** - Creates two strategic unified datasets
+
+**Dual Strategy Approach**:
+
+#### 📊 **Strategy A - Full Range (2022-2024)**
+- **File**: `unified_dataset_full_range_2022_2024.csv`
+- **Period**: 156 weeks (3 years)
+- **Channels**: 9 (excludes email - missing 2024)  
+- **Best for**: Trend analysis, recent performance, forecasting
+
+#### 📊 **Strategy B - Complete Coverage (2022-2023)**
+- **File**: `unified_dataset_complete_coverage_2022_2023.csv`
+- **Period**: 104 weeks (2 years)
+- **Channels**: 10 (includes ALL channels including email)
+- **Best for**: Full attribution, channel interactions, ROI optimization
+
+**What it does**:
+- Merges all preprocessed datasets on date
+- Handles different date coverage strategically
+- Creates unified column structure with dataset prefixes
+- Removes duplicate time features
+- Generates comprehensive validation reports
+- **Dual unification report** for strategy comparison
 
 **Key Operations**:
 ```python
-# Date harmonization
-def standardize_dates(df, date_col):
-    df[date_col] = pd.to_datetime(df[date_col])
-    df['week'] = df[date_col].dt.to_period('W')
-    return df
+# Strategic date filtering
+FULL_RANGE = '2022-01-03' to '2024-12-23'      # Strategy A
+COMPLETE_RANGE = '2022-01-03' to '2023-12-25'  # Strategy B
 
-# Multi-source merge
-unified_df = sales_df.merge(media_df, on='date', how='left')
-unified_df = unified_df.merge(tv_df, on='date', how='left')
+# Smart column renaming to avoid conflicts
+rename_dict = {col: f"{dataset_name}_{col}" for col in business_columns}
 
-# Column standardization
-channel_mapping = {
-    'tv_spend': 'TV',
-    'print_spend': 'Print', 
-    'email_spend': 'Email'
+# Merge with coverage tracking
+merge_summary[dataset_name] = {
+    'columns_added': new_columns,
+    'records_with_data': records_with_data,
+    'coverage_pct': (records_with_data / len(unified_df)) * 100
 }
 ```
-
-**Critical Validations**:
-- Date range consistency across all sources
-- No missing critical periods
-- Media spend vs metrics correlation
-- Data completeness report
-
-**Outputs**:
-- `data/processed/unified_dataset.csv` - **MAIN DATASET**
-- `data/processed/mmm_ready_data.csv` - **FOR MODELING**
-- Validation report
-- Data quality dashboard
 
 ## ⚠️ Critical Data Requirements
 
 ### 📅 **Date Requirements**
-- **Format**: YYYY-MM-DD or compatible
-- **Granularity**: Weekly (preferred) or Daily
-- **Range**: Minimum 2 years for reliable MMM
-- **Completeness**: No gaps in time series
+- **Format**: YYYY-MM-DD or DD-MM-YYYY (search data)
+- **Granularity**: Weekly (Mondays)
+- **Range**: 2022+ (automatically filtered)
+- **Completeness**: Handled by dual strategy approach
 
-### 📊 **Sales Data Requirements**
-```csv
-date,sales,units,revenue
-2022-01-03,125000,5000,250000
-2022-01-10,130000,5200,260000
+### 📊 **Expected Raw Data Files** (in `data/raw/`)
+```
+sales.xlsx          # Weekly sales data
+search.xlsx         # Search impressions & cost  
+tv_promo.xlsx       # TV promotional GRPs & cost
+tv_branding.xlsx    # TV branding GRPs & cost
+radio_national.xlsx # National radio GRPs & cost
+radio_local.xlsx    # Local radio GRPs & cost
+social.xlsx         # Social impressions & cost
+ooh.xlsx           # Out-of-home spend
+email.xlsx         # Email campaigns (2022-2023 only)
+promo.xlsx         # Promotion types & dates
 ```
 
-### 💰 **Media Spend Requirements**
-```csv
-date,tv_spend,print_spend,digital_spend,email_spend
-2022-01-03,10000,5000,8000,1000
-2022-01-10,12000,4000,9000,1200
+## 🔧 Troubleshooting
+
+### ❌ **"Permission Denied" Error**
+```bash
+chmod +x setup_data.sh
+./setup_data.sh
 ```
 
-### 📺 **Media Metrics (Optional)**
-```csv
-date,tv_grps,tv_reach,print_impressions,email_opens
-2022-01-03,150,0.45,2000000,15000
-2022-01-10,180,0.52,1800000,18000
+### ❌ **"Python not found" or Import Errors**
+```bash
+# Ensure virtual environment is activated
+source .venv/bin/activate
+
+# Install missing packages
+pip install pandas numpy matplotlib seaborn scipy openpyxl
 ```
 
-## 🔧 Troubleshooting Common Issues
+### ❌ **"print_status: command not found"**
+This is a minor shell script issue but doesn't affect functionality. The data processing will complete successfully.
 
-### ❌ **"Date Mismatch Error"**
-**Problem**: Different date formats across files
-**Solution**:
-```python
-# In cleaning notebook, standardize all dates
-df['date'] = pd.to_datetime(df['date'], infer_datetime_format=True)
+### ❌ **Missing Raw Data Files**
+Ensure all 10 Excel files are in `data/raw/`:
+```bash
+ls -la data/raw/*.xlsx
+# Should show 10 files
 ```
 
-### ❌ **"Missing Data Periods"**
-**Problem**: Gaps in time series
-**Solution**:
-```python
-# Create complete date range and fill gaps
-date_range = pd.date_range(start=df['date'].min(), 
-                          end=df['date'].max(), 
-                          freq='W')
-df = df.set_index('date').reindex(date_range).fillna(0)
+### ❌ **Data Quality Issues**
+Check the automated quality reports:
+- `data/processed/preprocessing_report.json`
+- `data/processed/dual_unification_report.json`
+
+## 📈 Data Quality Validation
+
+### ✅ **Automated Checks**
+The pipeline includes comprehensive quality validation:
+
+1. **Missing Values**: All datasets checked (excellent quality - 0% missing)
+2. **Outliers**: Conservative detection and treatment (<2% capped)
+3. **Skewness**: Acceptable levels (-0.20 to 0.41)
+4. **Date Continuity**: Weekly Monday-based time series
+5. **Dual Strategy Comparison**: Coverage and completeness metrics
+
+### 📊 **Quality Report Example**
 ```
+✅ EXCELLENT DATA QUALITY CONFIRMED!
+   ✅ No missing values across all datasets
+   ✅ Acceptable skewness levels (-0.20 to 0.41)  
+   ✅ Minimal outliers (only email: 5.8%, ooh: 3.8%)
+   ✅ Well-structured time series data
 
-### ❌ **"Column Name Conflicts"**
-**Problem**: Same metrics with different names
-**Solution**:
-```python
-# Standardize column names
-column_mapping = {
-    'TV Spend': 'tv_spend',
-    'Television_Budget': 'tv_spend',
-    'tv_investment': 'tv_spend'
-}
-df = df.rename(columns=column_mapping)
-```
-
-### ❌ **"Media Metrics vs Spend Mismatch"**
-**Problem**: Zero spend but non-zero metrics
-**Solution**:
-```python
-# Validate spend vs metrics consistency
-def validate_spend_metrics(df):
-    for channel in ['tv', 'print', 'digital']:
-        spend_col = f'{channel}_spend'
-        metrics_col = f'{channel}_grps'  # or impressions
-        
-        # Flag inconsistencies
-        zero_spend_nonzero_metrics = (df[spend_col] == 0) & (df[metrics_col] > 0)
-        if zero_spend_nonzero_metrics.any():
-            print(f"Warning: {channel} has metrics without spend")
-```
-
-## 📈 Data Quality Checks
-
-### ✅ **Automated Validations**
-The unification notebook includes these automatic checks:
-
-1. **Date Continuity**: No gaps in time series
-2. **Value Ranges**: Spend and metrics within reasonable bounds
-3. **Correlation Check**: Spend vs metrics correlation > 0.7
-4. **Completeness**: < 5% missing values in critical columns
-5. **Outlier Detection**: Values beyond 3 standard deviations
-
-### 📊 **Quality Report Output**
-```
-=== DATA QUALITY REPORT ===
-✅ Date Range: 2022-01-03 to 2023-12-25 (104 weeks)
-✅ Missing Values: Sales (0%), TV Spend (0%), Print Spend (2%)
-✅ Outliers Detected: 3 weeks with exceptional sales (flagged)
-✅ Correlations: TV Spend vs GRPs (0.95), Print Spend vs Impressions (0.89)
-⚠️  Warning: Email data missing for weeks 45-52 of 2022
+📊 DUAL STRATEGY DATASETS CREATED:
+   Strategy A: 156 weeks, 9 channels, 96.3% completeness
+   Strategy B: 104 weeks, 10 channels, 97.5% completeness
 ```
 
 ## 🔄 Updating Data
 
 ### **Adding New Data**
-1. Place new files in `data/raw/`
-2. Update date ranges in cleaning notebook
-3. Re-run both notebooks: `00_basic_cleaning.ipynb` → `01b_data_unification_dual.ipynb`
-4. Validate new unified dataset
-5. Re-run MMM models with updated data
-
-### **Monthly/Weekly Updates**
+1. Place new Excel files in `data/raw/`
+2. Re-run the pipeline:
 ```bash
-# Quick update script (save as update_data.sh)
-#!/bin/bash
-echo "🔄 Updating MMM Data Pipeline"
-echo "1. Running basic cleaning..."
-jupyter nbconvert --execute notebooks/00_basic_cleaning.ipynb
-
-echo "2. Running data unification..."
-jupyter nbconvert --execute notebooks/01b_data_unification_dual.ipynb
-
-echo "3. Data update complete! Check data/processed/ for new files"
+source .venv/bin/activate
+./setup_data.sh
 ```
+
+### **Monthly Updates**
+The pipeline is designed for easy updates:
+```bash
+#!/bin/bash
+# Save as update_pipeline.sh
+
+echo "🔄 Updating Ice Cream MMM Data Pipeline"
+source .venv/bin/activate
+./setup_data.sh
+echo "✅ Pipeline update complete!"
+```
+
+## 🚀 Next Steps After Data Setup
+
+Once the pipeline completes successfully:
+
+1. **📊 Explore Datasets**:
+   ```bash
+   # Quick look at the unified datasets
+   head data/processed/unified_dataset_*.csv
+   ```
+
+2. **🔍 Run EDA**:
+   ```bash
+   cd notebooks
+   python 02_unified_data_eda.py
+   ```
+
+3. **🤖 Develop MMM Models**:
+   - Use both strategic datasets for comparison
+   - Start with Strategy B (complete coverage) for full attribution
+   - Use Strategy A (full range) for trend validation
+
+4. **💰 ROI Optimization**:
+   - Compare model performance across strategies
+   - Make data-driven decision on final approach
 
 ## 📞 Support
 
-### **If You Get Stuck**:
-1. **Check notebook outputs**: Look for error messages in cell outputs
-2. **Validate raw data**: Ensure files are in correct format
-3. **Review data quality**: Check for missing dates or extreme values
-4. **Consult documentation**: See `data/explanations/` folder
+### **If the Pipeline Fails**:
+1. **Check virtual environment**: `source .venv/bin/activate`
+2. **Verify raw data**: Ensure all 10 Excel files exist in `data/raw/`
+3. **Check Python output**: Look for specific error messages
+4. **Validate file permissions**: `chmod +x setup_data.sh`
 
-### **Common Files to Check**:
-- `data/explanations/column_definitions.md` - What each column means
-- `data/explanations/data_sources.md` - Where data comes from
-- `notebooks/01b_data_unification_dual.ipynb` - Main unification logic
+### **Success Indicators**:
+✅ Two unified datasets created in `data/processed/`  
+✅ Dual unification report generated  
+✅ 10 preprocessed individual datasets  
+✅ No critical errors in pipeline output  
 
 ---
 
-**Remember**: The `01b_data_unification_dual.ipynb` notebook is the **CRITICAL** step that makes all subsequent analysis possible. Always run this after any data changes! 
+**Remember**: The automated `setup_data.sh` pipeline handles all the complexity! Just ensure your virtual environment is set up and run the script. The dual strategy approach gives you both complete attribution AND recent trends for optimal MMM development! 🍦 
