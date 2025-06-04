@@ -529,3 +529,194 @@ print(f"   Next: Add weather data, advanced adstock, saturation curves")
 # 5. **External Data** - Competition, distribution, economy
 # 
 # **The enhanced model is a significant improvement but still needs more sophisticated approaches for production use!** 📈 
+
+# %%
+# Step 11: Clean Enhanced Model Performance Visualization
+print(f"\n📊 CLEAN ENHANCED MODEL PERFORMANCE VISUALIZATION")
+print("=" * 55)
+
+# Clean plotting settings for executive presentation
+plt.style.use('seaborn-v0_8-whitegrid')
+plt.rcParams['figure.figsize'] = (16, 10)
+plt.rcParams['font.size'] = 11
+plt.rcParams['axes.titlesize'] = 14
+plt.rcParams['axes.labelsize'] = 12
+
+# Define clean colors
+actual_color = '#1f77b4'  # Blue
+predicted_color = '#ff7f0e'  # Orange
+enhanced_color = '#2ca02c'  # Green
+residual_color = '#d62728'  # Red
+
+print(f"🎯 Enhanced Model Performance:")
+print(f"   R² Score: {r2_enhanced:.1%}")
+print(f"   Average Error: ${mae_enhanced:,.0f}")
+print(f"   Error Rate: {mape_enhanced:.1f}%")
+print(f"   Improvement over Basic: +{(r2_enhanced-r2_basic)*100:.1f} percentage points")
+
+# Create Clean Visualization
+fig = plt.figure(figsize=(20, 12))
+fig.suptitle('Enhanced MMM Model Performance', fontsize=18, fontweight='bold', y=0.95)
+
+# 1. Main Time Series Chart (Large) - Both models
+ax1 = plt.subplot(2, 2, (1, 2))
+ax1.plot(df['date'], y, color=actual_color, linewidth=3, label='Actual Sales', alpha=0.9)
+ax1.plot(df['date'], y_pred_basic, color='red', linewidth=2, 
+         label=f'Basic Model (R²={r2_basic:.1%})', linestyle=':', alpha=0.7)
+ax1.plot(df['date'], y_pred_enhanced, color=enhanced_color, linewidth=2.5, 
+         label=f'Enhanced Model (R²={r2_enhanced:.1%})', linestyle='--', alpha=0.8)
+
+ax1.set_title('Enhanced vs Basic Model: Actual vs Predicted Sales', 
+              fontweight='bold', fontsize=16, pad=20)
+ax1.set_xlabel('Date', fontweight='bold', fontsize=12)
+ax1.set_ylabel('Sales ($)', fontweight='bold', fontsize=12)
+
+# Clean legend
+ax1.legend(loc='upper left', fontsize=12, frameon=True, fancybox=True, shadow=True)
+
+# Format y-axis
+ax1.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Add clean performance box
+performance_text = f'''Enhanced Model Performance
+R² Score: {r2_enhanced:.1%}
+Improvement: +{(r2_enhanced-r2_basic)*100:.1f} pts
+Avg Error: ${mae_enhanced:,.0f}
+Error Rate: {mape_enhanced:.1f}%'''
+
+ax1.text(0.98, 0.98, performance_text, transform=ax1.transAxes, fontsize=11,
+         verticalalignment='top', horizontalalignment='right',
+         bbox=dict(boxstyle='round,pad=0.5', facecolor='lightgreen', alpha=0.8))
+
+# 2. Scatter Plot: Actual vs Predicted (Both Models)
+ax2 = plt.subplot(2, 2, 3)
+ax2.scatter(y, y_pred_basic, alpha=0.5, color='red', s=30, label=f'Basic (R²={r2_basic:.3f})')
+ax2.scatter(y, y_pred_enhanced, alpha=0.7, color=enhanced_color, s=40, 
+           edgecolors='white', linewidth=1, label=f'Enhanced (R²={r2_enhanced:.3f})')
+ax2.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', linewidth=2, alpha=0.8)
+
+ax2.set_title('Model Comparison: Actual vs Predicted', fontweight='bold', fontsize=14)
+ax2.set_xlabel('Actual Sales ($)', fontweight='bold')
+ax2.set_ylabel('Predicted Sales ($)', fontweight='bold')
+
+# Format axes
+ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+ax2.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Legend
+ax2.legend(loc='upper left', fontsize=11)
+
+# 3. Residuals Analysis Comparison
+ax3 = plt.subplot(2, 2, 4)
+residuals_basic = y - y_pred_basic
+residuals_enhanced = y - y_pred_enhanced
+
+ax3.plot(df['date'], residuals_basic, color='red', linewidth=1.5, alpha=0.6, label='Basic Model Errors')
+ax3.plot(df['date'], residuals_enhanced, color=enhanced_color, linewidth=2, alpha=0.8, label='Enhanced Model Errors')
+ax3.axhline(y=0, color='black', linestyle='-', linewidth=1.5, alpha=0.8)
+
+ax3.set_title('Enhanced Model: Prediction Errors Comparison', fontweight='bold', fontsize=14)
+ax3.set_xlabel('Date', fontweight='bold')
+ax3.set_ylabel('Prediction Error ($)', fontweight='bold')
+
+# Format y-axis
+ax3.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Legend
+ax3.legend(loc='upper right', fontsize=10)
+
+# Add error improvement statistics
+error_std_basic = residuals_basic.std()
+error_std_enhanced = residuals_enhanced.std()
+error_improvement = (error_std_basic - error_std_enhanced) / error_std_basic * 100
+
+error_text = f'''Error Reduction
+Basic Std: ${error_std_basic:,.0f}
+Enhanced Std: ${error_std_enhanced:,.0f}
+Improvement: {error_improvement:.1f}%'''
+
+ax3.text(0.02, 0.98, error_text, transform=ax3.transAxes, fontsize=10,
+         verticalalignment='top',
+         bbox=dict(boxstyle='round,pad=0.3', facecolor='lightgreen', alpha=0.8))
+
+plt.tight_layout()
+plt.subplots_adjust(top=0.92)
+plt.show()
+
+# Executive Summary Chart for Enhanced Model
+print(f"\n📊 CREATING ENHANCED EXECUTIVE SUMMARY")
+print("=" * 45)
+
+fig, ax = plt.subplots(1, 1, figsize=(14, 8))
+
+# Clean time series for executives
+ax.plot(df['date'], y, color=actual_color, linewidth=4, label='Actual Sales', alpha=0.9)
+ax.plot(df['date'], y_pred_enhanced, color=enhanced_color, linewidth=3, 
+        label='Enhanced Model Prediction', linestyle='--', alpha=0.85)
+
+ax.set_title(f'Enhanced MMM Model Performance: {r2_enhanced:.1%} Accuracy', 
+             fontweight='bold', fontsize=16, pad=20)
+ax.set_xlabel('Date', fontweight='bold', fontsize=14)
+ax.set_ylabel('Sales', fontweight='bold', fontsize=14)
+
+# Clean legend
+ax.legend(loc='upper left', fontsize=14, frameon=True, fancybox=True, shadow=True)
+
+# Format y-axis
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Clean grid
+ax.grid(True, alpha=0.3, linestyle='-', linewidth=0.5)
+
+# Executive summary box
+exec_text = f'''Enhanced Model Summary
+✓ Model explains {r2_enhanced:.1%} of sales variation
+✓ Improved by {(r2_enhanced-r2_basic)*100:.1f} percentage points
+✓ Added seasonality & carryover effects
+✓ Better foundation for budget planning'''
+
+ax.text(0.98, 0.02, exec_text, transform=ax.transAxes, fontsize=12,
+        verticalalignment='bottom', horizontalalignment='right',
+        bbox=dict(boxstyle='round,pad=0.7', facecolor='lightgreen', alpha=0.9))
+
+plt.tight_layout()
+plt.show()
+
+print(f"\n🎯 ENHANCED MODEL VISUAL SUMMARY COMPLETE!")
+print(f"   Enhanced Performance: {r2_enhanced:.1%} accuracy")
+print(f"   Clear improvement over foundation model")
+print(f"   Ready for stakeholder presentation")
+
+# %%
+# Step 12: Side-by-Side Model Comparison Summary
+print(f"\n📊 FINAL MODEL COMPARISON SUMMARY")
+print("=" * 40)
+
+# Create comparison table
+comparison_df = pd.DataFrame({
+    'Metric': ['R² Score', 'Explained Variance %', 'Avg Error ($)', 'Error Rate %', 'Features'],
+    'Basic Model': [f'{r2_basic:.3f}', f'{r2_basic*100:.1f}%', f'{mean_absolute_error(y, y_pred_basic):,.0f}', 
+                   f'{np.mean(np.abs((y - y_pred_basic) / y)) * 100:.1f}%', f'{len(X_basic.columns)}'],
+    'Enhanced Model': [f'{r2_enhanced:.3f}', f'{r2_enhanced*100:.1f}%', f'{mae_enhanced:,.0f}', 
+                      f'{mape_enhanced:.1f}%', f'{len(X_enhanced.columns)}'],
+    'Improvement': [f'+{r2_enhanced-r2_basic:.3f}', f'+{(r2_enhanced-r2_basic)*100:.1f} pts', 
+                   f'{(mean_absolute_error(y, y_pred_basic)-mae_enhanced):+,.0f}', 
+                   f'{(np.mean(np.abs((y - y_pred_basic) / y)) * 100 - mape_enhanced):+.1f} pts',
+                   f'+{len(X_enhanced.columns)-len(X_basic.columns)}']
+})
+
+print(f"\n🏆 MODEL COMPARISON TABLE:")
+print(comparison_df.to_string(index=False))
+
+print(f"\n✅ KEY ENHANCEMENTS MADE:")
+print(f"   📈 Adstock Effects: Media carryover modeling")
+print(f"   🌡️ Seasonality: Quarterly patterns captured")
+print(f"   📊 Time Trends: Business growth patterns")
+print(f"   🎯 Better Attribution: Separate seasonal vs media effects")
+
+print(f"\n🚀 ENHANCED MMM VISUALIZATION COMPLETE!")
+print(f"   Clear demonstration of model improvements")
+print(f"   Ready for executive presentation")
+print(f"   Foundation set for advanced MMM features")
+
+# ... existing code ...

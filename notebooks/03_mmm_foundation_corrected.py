@@ -643,6 +643,151 @@ print(f"   ✅ Clean foundation established for advanced modeling")
 print(f"   ✅ Business insights ready despite model limitations")
 print(f"   🚀 Ready for enhancement: 04_mmm_enhanced.py")
 
+# %%
+# Step 12: Clean Model Performance Visualization
+print(f"\n📊 CLEAN FOUNDATION MODEL PERFORMANCE VISUALIZATION")
+print("=" * 55)
+
+# Clean plotting settings for executive presentation
+plt.style.use('seaborn-v0_8-whitegrid')
+plt.rcParams['figure.figsize'] = (16, 10)
+plt.rcParams['font.size'] = 11
+plt.rcParams['axes.titlesize'] = 14
+plt.rcParams['axes.labelsize'] = 12
+
+# Define clean colors
+actual_color = '#1f77b4'  # Blue
+predicted_color = '#ff7f0e'  # Orange
+residual_color = '#d62728'  # Red
+
+print(f"🎯 Foundation Model Performance:")
+print(f"   R² Score: {r2:.1%}")
+print(f"   Average Error: ${mae:,.0f}")
+print(f"   Error Rate: {mape:.1f}%")
+
+# Create Clean Visualization
+fig = plt.figure(figsize=(20, 12))
+fig.suptitle('Foundation MMM Model Performance', fontsize=18, fontweight='bold', y=0.95)
+
+# 1. Main Time Series Chart (Large)
+ax1 = plt.subplot(2, 2, (1, 2))
+ax1.plot(df_clean['date'], y, color=actual_color, linewidth=3, label='Actual Sales', alpha=0.9)
+ax1.plot(df_clean['date'], y_pred, color=predicted_color, linewidth=2.5, 
+         label='Foundation Model Prediction', linestyle='--', alpha=0.8)
+
+ax1.set_title('Foundation Model: Actual vs Predicted Sales', 
+              fontweight='bold', fontsize=16, pad=20)
+ax1.set_xlabel('Date', fontweight='bold', fontsize=12)
+ax1.set_ylabel('Sales ($)', fontweight='bold', fontsize=12)
+
+# Clean legend
+ax1.legend(loc='upper left', fontsize=12, frameon=True, fancybox=True, shadow=True)
+
+# Format y-axis
+ax1.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Add clean performance box
+performance_text = f'''Foundation Model Performance
+R² Score: {r2:.1%}
+Avg Error: ${mae:,.0f}
+Error Rate: {mape:.1f}%'''
+
+ax1.text(0.98, 0.98, performance_text, transform=ax1.transAxes, fontsize=11,
+         verticalalignment='top', horizontalalignment='right',
+         bbox=dict(boxstyle='round,pad=0.5', facecolor='lightblue', alpha=0.8))
+
+# 2. Scatter Plot: Actual vs Predicted
+ax2 = plt.subplot(2, 2, 3)
+ax2.scatter(y, y_pred, alpha=0.7, color=predicted_color, s=40, edgecolors='white', linewidth=1)
+ax2.plot([y.min(), y.max()], [y.min(), y.max()], 'k--', linewidth=2, alpha=0.8)
+
+ax2.set_title('Foundation Model Accuracy: Actual vs Predicted', fontweight='bold', fontsize=14)
+ax2.set_xlabel('Actual Sales ($)', fontweight='bold')
+ax2.set_ylabel('Predicted Sales ($)', fontweight='bold')
+
+# Format axes
+ax2.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+ax2.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Add R² annotation
+ax2.text(0.05, 0.95, f'R² = {r2:.3f}', transform=ax2.transAxes, 
+         fontsize=13, fontweight='bold',
+         bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.9))
+
+# 3. Residuals Analysis
+ax3 = plt.subplot(2, 2, 4)
+residuals = y - y_pred
+ax3.plot(df_clean['date'], residuals, color=residual_color, linewidth=2, alpha=0.7)
+ax3.axhline(y=0, color='black', linestyle='-', linewidth=1.5, alpha=0.8)
+ax3.fill_between(df_clean['date'], residuals, 0, alpha=0.3, color=residual_color)
+
+ax3.set_title('Foundation Model: Prediction Errors Over Time', fontweight='bold', fontsize=14)
+ax3.set_xlabel('Date', fontweight='bold')
+ax3.set_ylabel('Prediction Error ($)', fontweight='bold')
+
+# Format y-axis
+ax3.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Add error statistics
+error_std = residuals.std()
+error_mean = residuals.mean()
+error_text = f'''Error Statistics
+Mean: ${error_mean:,.0f}
+Std Dev: ${error_std:,.0f}
+Max Error: ${abs(residuals).max():,.0f}'''
+
+ax3.text(0.02, 0.98, error_text, transform=ax3.transAxes, fontsize=10,
+         verticalalignment='top',
+         bbox=dict(boxstyle='round,pad=0.3', facecolor='lightyellow', alpha=0.8))
+
+plt.tight_layout()
+plt.subplots_adjust(top=0.92)
+plt.show()
+
+# Executive Summary Chart for Foundation Model
+print(f"\n📊 CREATING FOUNDATION EXECUTIVE SUMMARY")
+print("=" * 45)
+
+fig, ax = plt.subplots(1, 1, figsize=(14, 8))
+
+# Clean time series for executives
+ax.plot(df_clean['date'], y, color=actual_color, linewidth=4, label='Actual Sales', alpha=0.9)
+ax.plot(df_clean['date'], y_pred, color=predicted_color, linewidth=3, 
+        label='Foundation Model Prediction', linestyle='--', alpha=0.85)
+
+ax.set_title(f'Foundation MMM Model Performance: {r2:.1%} Accuracy', 
+             fontweight='bold', fontsize=16, pad=20)
+ax.set_xlabel('Date', fontweight='bold', fontsize=14)
+ax.set_ylabel('Sales', fontweight='bold', fontsize=14)
+
+# Clean legend
+ax.legend(loc='upper left', fontsize=14, frameon=True, fancybox=True, shadow=True)
+
+# Format y-axis
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: f'${x/1000:.0f}K'))
+
+# Clean grid
+ax.grid(True, alpha=0.3, linestyle='-', linewidth=0.5)
+
+# Executive summary box
+exec_text = f'''Foundation Model Summary
+✓ Model explains {r2:.1%} of sales variation
+✓ Average prediction error: {mape:.1f}%
+⚠️ Missing seasonality & carryover effects
+🚀 Ready for enhancement'''
+
+ax.text(0.98, 0.02, exec_text, transform=ax.transAxes, fontsize=12,
+        verticalalignment='bottom', horizontalalignment='right',
+        bbox=dict(boxstyle='round,pad=0.7', facecolor='lightcoral', alpha=0.9))
+
+plt.tight_layout()
+plt.show()
+
+print(f"\n🎯 FOUNDATION MODEL VISUAL SUMMARY COMPLETE!")
+print(f"   Foundation Performance: {r2:.1%} accuracy")
+print(f"   Clear visualization shows model limitations")
+print(f"   Ready for enhanced model comparison")
+
 # %% [markdown]
 # ## Foundation MMM Results Summary
 # 
