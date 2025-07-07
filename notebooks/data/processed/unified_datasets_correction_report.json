@@ -1,0 +1,26 @@
+{
+  "issue_identified": "Email campaigns only available through 2023, but included in 2022-2024 dataset",
+  "solution_applied": "Removed email campaigns from full range dataset to maintain consistent channel mix",
+  "datasets_created": {
+    "complete_channels_2022_2023": {
+      "file": "mmm_dataset_complete_channels_2022_2023.csv",
+      "shape": [
+        104,
+        32
+      ],
+      "date_range": "2022-01-03 to 2023-12-25",
+      "channels": "All channels including email campaigns",
+      "use_case": "Analysis of complete channel mix for 2022-2023 period"
+    },
+    "consistent_channels_2022_2024": {
+      "file": "mmm_dataset_consistent_channels_2022_2024.csv",
+      "shape": [
+        156,
+        31
+      ],
+      "date_range": "2022-01-03 to 2024-12-23",
+      "channels": "All channels except email campaigns",
+      "use_case": "MMM modeling with consistent channel mix across full time range"
+    }
+  }
+}

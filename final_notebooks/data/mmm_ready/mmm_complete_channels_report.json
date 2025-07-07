@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-06-19T21:37:33.294049",
+  "dataset_type": "complete_channels_with_email",
+  "period": "2022-2023",
+  "original_shape": [
+    104,
+    18
+  ],
+  "optimized_shape": [
+    104,
+    18
+  ],
+  "removed_features": [
+    "year (linear time - redundant with cyclical)",
+    "month (linear time - redundant with cyclical)",
+    "week (linear time - redundant with cyclical)",
+    "quarter (linear time - redundant with cyclical)",
+    "tv_branding_tv_branding_grps (corr=1.000 with tv_branding_tv_branding_cost)",
+    "radio_local_radio_local_grps (corr=1.000 with radio_local_radio_local_cost)",
+    "radio_national_radio_national_grps (corr=1.000 with radio_national_radio_national_cost)",
+    "tv_promo_tv_promo_grps (corr=1.000 with tv_promo_tv_promo_cost)",
+    "social_impressions (corr=1.000 with social_costs)",
+    "search_impressions (corr=1.000 with search_cost)",
+    "weather_temperature_min (redundant with temperature_mean)",
+    "weather_temperature_max (redundant with temperature_mean)",
+    "is_month_end (too granular for MMM, captured by seasonality)",
+    "season (categorical - not business critical)"
+  ],
+  "feature_categories": {
+    "Time/Seasonality": [
+      "month_sin",
+      "month_cos",
+      "week_sin",
+      "week_cos",
+      "holiday_period"
+    ],
+    "Media Spend": [
+      "search_cost",
+      "tv_branding_tv_branding_cost",
+      "social_costs",
+      "ooh_ooh_spend",
+      "radio_national_radio_national_cost",
+      "radio_local_radio_local_cost",
+      "tv_promo_tv_promo_cost"
+    ],
+    "Media Other": [
+      "email_email_campaigns"
+    ],
+    "Weather": [
+      "weather_temperature_mean",
+      "weather_sunshine_duration"
+    ],
+    "Promotion": [
+      "promo_promotion_type"
+    ],
+    "Other": []
+  },
+  "validation_setup": {
+    "method": "temporal_split",
+    "test_months": 3,
+    "split_date": "2023-09-25T00:00:00",
+    "train_size": 90,
+    "test_size": 14,
+    "validation_periods": [
+      {
+        "months_back": 3,
+        "split_date": "2023-09-25T00:00:00",
+        "train_size": 90,
+        "test_size": 14
+      },
+      {
+        "months_back": 6,
+        "split_date": "2023-06-25T00:00:00",
+        "train_size": 77,
+        "test_size": 27
+      },
+      {
+        "months_back": 9,
+        "split_date": "2023-03-25T00:00:00",
+        "train_size": 64,
+        "test_size": 40
+      },
+      {
+        "months_back": 12,
+        "split_date": "2022-12-25T00:00:00",
+        "train_size": 51,
+        "test_size": 53
+      }
+    ]
+  }
+}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_minor_changes</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #27ae60;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+        }
+        blockquote {
+            border-left: 4px solid #e74c3c;
+            margin: 20px 0;
+            padding-left: 20px;
+            font-style: italic;
+            color: #666;
+        }
+        .math-formula {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .formula-explanation {
+            background-color: #e8f5e8;
+            border: 1px solid #27ae60;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .formula-explanation h4 {
+            margin-top: 0;
+            color: #27ae60;
+        }
+        .formula-list {
+            padding-left: 0;
+            list-style: none;
+        }
+        .formula-list li {
+            margin: 8px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .formula-list li:last-child {
+            border-bottom: none;
+        }
+        .priority-high {
+            background-color: #ffe6e6;
+            border-left: 4px solid #e74c3c;
+            padding: 10px;
+        }
+        .priority-medium {
+            background-color: #fff3e0;
+            border-left: 4px solid #f39c12;
+            padding: 10px;
+        }
+        .priority-low {
+            background-color: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 10px;
+        }
+        .timestamp {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        ul, ol {
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .emoji {
+            font-size: 1.2em;
+        }
+        .correction-box {
+            background-color: #fff9c4;
+            border: 1px solid #f39c12;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .error-box {
+            background-color: #ffe6e6;
+            border: 1px solid #e74c3c;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .success-box {
+            background-color: #e8f5e8;
+            border: 1px solid #27ae60;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .variable-definition {
+            margin-left: 20px;
+            font-style: italic;
+            color: #555;
+        }
+        .channel-formula {
+            font-family: 'Monaco', 'Consolas', monospace;
+            background-color: #f8f9fa;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid #dee2e6;
+        }
+    </style>
+    
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\(', '\)']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <h1 id="minor-changes-sections-1-2">MINOR CHANGES - Sections 1 &amp; 2</h1>
+<h2 id="section-1-introduction-keep-with-minor-fixes">Section 1: Introduction ✅ <strong>KEEP WITH MINOR FIXES</strong></h2>
+<h3 id="what-to-change"><strong>What to Change:</strong></h3>
+<p><strong>Current:</strong> "July 5, 2025"<br />
+<strong>Change to:</strong> Current date (December 2024 or when report is finalized)</p>
+<p><strong>Current:</strong> General timeframe mention<br />
+<strong>Add:</strong> Brief mention that methodology was refined through iterative analysis</p>
+<h3 id="updated-introduction-section"><strong>Updated Introduction Section:</strong></h3>
+<hr />
+<p><strong>Project Algorithm</strong></p>
+<p><strong>Project Report</strong></p>
+<p><strong>Applied Mathematics: Data Science</strong></p>
+<p><strong>Inholland</strong></p>
+<p><strong>Amsterdam</strong></p>
+<p><strong>December 2024</strong></p>
+<hr />
+<p><strong>Section 1: Introduction</strong></p>
+<p>In a competitive and saturated market, companies aim to maximize the return on their marketing investments. However, without proper analysis, allocating media budgets effectively across various channels remains a significant challenge. To address this, Marketing Mix Modeling (MMM) provides a quantitative approach that helps determine which marketing efforts drive sales and how future spending should be optimized.</p>
+<p>This project was executed as an independent academic study in collaboration with Group M. The main objective was to create a Marketing Mix Model (MMM) using market data from a Dutch ice cream company to evaluate the effectiveness of different marketing channels and provide actionable recommendations for budget optimization specifically tailored to the Netherlands market context.</p>
+<p>The provided dataset spans from 2020 to 2025 and includes weekly information on sales, media spend, promotional activity, and external factors including Dutch weather data and cultural calendar events. The team followed a structured approach: cleaning and unifying the data, engineering features through <strong>data-driven optimization of adstock and saturation effects</strong>, building multiple models with <strong>rigorous validation</strong>, and simulating budget scenarios to assess ROI outcomes through <strong>counterfactual analysis</strong>.</p>
+<p>This report outlines the <strong>corrected methodology</strong>, findings, and strategic insights derived from the model, with the ultimate goal of helping the company improve its marketing performance through data-driven decision-making.</p>
+<hr />
+<h2 id="section-2-data-overview-minor-updates-needed">Section 2: Data Overview ✅ <strong>MINOR UPDATES NEEDED</strong></h2>
+<h3 id="what-to-change_1"><strong>What to Change:</strong></h3>
+<ol>
+<li><strong>Add specific correlation findings</strong></li>
+<li><strong>Clarify channel separation rationale</strong></li>
+<li><strong>Update media channel description</strong></li>
+</ol>
+<h3 id="changes-needed"><strong>Changes Needed:</strong></h3>
+<p><strong>Current:</strong> "Media Spend: Spend data was collected across six primary marketing channels: TV Branding, Radio (National and Local), Search, Social Media, and Out-of-Home (OOH) advertising."</p>
+<p><strong>Change to:</strong> <br />
+"Media Spend: Spend data was collected across seven distinct marketing channels: TV Branding, TV Promo, Radio National, Radio Local, Search, Social Media, and Out-of-Home (OOH) advertising. <strong>Initial correlation analysis revealed that channel correlations were below 0.7 (e.g., TV Branding ↔ TV Promo: 0.096, Radio National ↔ Radio Local: -0.064), confirming that channels should be analyzed separately rather than aggregated.</strong>"</p>
+<p><strong>Add new paragraph after media spend description:</strong></p>
+<p>"<strong>Channel Independence Analysis:</strong> A critical finding during preprocessing was that media channels showed low inter-correlation, with most correlations below 0.3. This confirmed that each channel operates independently and should be modeled separately, contrary to common industry practices that aggregate similar channels. This independence allowed for more granular optimization and accurate attribution of each channel's contribution to sales performance."</p>
+<h3 id="updated-section-2-key-points"><strong>Updated Section 2 Key Points:</strong></h3>
+<ul>
+<li>
+<p>✅ Keep all existing data source descriptions</p>
+</li>
+<li>
+<p>✅ Keep timeframe details (156 weeks, 2022-2024)</p>
+</li>
+<li>
+<p>✅ Keep promotional and weather variable descriptions</p>
+</li>
+<li>
+<p>➕ <strong>Add:</strong> Channel correlation findings</p>
+</li>
+<li>
+<p>➕ <strong>Add:</strong> Rationale for separate channel analysis</p>
+</li>
+<li>
+<p>➕ <strong>Update:</strong> Media channel count and naming consistency</p>
+</li>
+</ul>
+<h3 id="minor-formatting-updates"><strong>Minor Formatting Updates:</strong></h3>
+<ul>
+<li>
+<p>Ensure consistent channel naming throughout (match FINAL_MODEL2.py naming)</p>
+</li>
+<li>
+<p>Add emphasis on data-driven methodology approach</p>
+</li>
+<li>
+<p>Maintain all existing content structure and quality </p>
+</li>
+</ul>
+        <div class="timestamp">
+            Generated on 2025-07-06 02:30:23 with MathJax support
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{
+  "timestamp": "2025-06-19T21:17:06.136128",
+  "enhancement": "Weather data integration added",
+  "weather_variables": [
+    "weather_temperature_mean",
+    "weather_temperature_max",
+    "weather_temperature_min",
+    "weather_sunshine_duration"
+  ],
+  "strategy_comparison": {
+    "strategy_a_full_range_weather": {
+      "description": "Full Range + Weather (2022-2024)",
+      "date_range": [
+        "2022-01-03",
+        "2024-12-23"
+      ],
+      "shape": [
+        156,
+        32
+      ],
+      "marketing_channels": 9,
+      "weather_coverage": 100.0,
+      "filename": "unified_dataset_full_range_2022_2024_with_weather.csv"
+    },
+    "strategy_b_complete_weather": {
+      "description": "Complete Coverage + Weather (2022-2023)",
+      "date_range": [
+        "2022-01-03",
+        "2023-12-25"
+      ],
+      "shape": [
+        104,
+        32
+      ],
+      "marketing_channels": 9,
+      "weather_coverage": 100.0,
+      "filename": "unified_dataset_complete_coverage_2022_2023_with_weather.csv"
+    }
+  },
+  "merge_summaries": {
+    "strategy_a": {
+      "weather": {
+        "columns_added": 4,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "email": {
+        "columns_added": -10,
+        "records_with_data": 104,
+        "coverage_pct": 66.66666666666666
+      },
+      "search": {
+        "columns_added": -9,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "tv_branding": {
+        "columns_added": -9,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "social": {
+        "columns_added": -9,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "ooh": {
+        "columns_added": -10,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "promo": {
+        "columns_added": -10,
+        "records_with_data": 47,
+        "coverage_pct": 30.128205128205128
+      },
+      "radio_national": {
+        "columns_added": -9,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "radio_local": {
+        "columns_added": -9,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      },
+      "tv_promo": {
+        "columns_added": -9,
+        "records_with_data": 156,
+        "coverage_pct": 100.0
+      }
+    },
+    "strategy_b": {
+      "weather": {
+        "columns_added": 4,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "email": {
+        "columns_added": -10,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "search": {
+        "columns_added": -9,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "tv_branding": {
+        "columns_added": -9,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "social": {
+        "columns_added": -9,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "ooh": {
+        "columns_added": -10,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "promo": {
+        "columns_added": -10,
+        "records_with_data": 30,
+        "coverage_pct": 28.846153846153843
+      },
+      "radio_national": {
+        "columns_added": -9,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "radio_local": {
+        "columns_added": -9,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      },
+      "tv_promo": {
+        "columns_added": -9,
+        "records_with_data": 104,
+        "coverage_pct": 100.0
+      }
+    }
+  },
+  "recommendation": {
+    "approach": "Enhanced dual strategy with environmental context",
+    "benefits": [
+      "Weather factors for seasonality modeling",
+      "Temperature impact on consumer behavior",
+      "Sunshine duration for outdoor activity correlation",
+      "Environmental context for media effectiveness"
+    ],
+    "use_cases": {
+      "strategy_a": "Trend analysis with weather patterns (recent 3 years)",
+      "strategy_b": "Complete attribution with environmental factors (2 years)"
+    }
+  }
+}

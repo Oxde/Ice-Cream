@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 7: ROI Analysis</title>
+    
+    <style>
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #000;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #ccc;
+        }
+        .figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .figure img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .figure-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .roi-moderate { color: #f39c12; font-weight: bold; }
+        .roi-weak { color: #e74c3c; font-weight: bold; }
+        .formula-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+        }
+    </style>
+    
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\(', '\)']],
+                displayMath: [['$$', '$$'], ['\[', '\]']],
+                processEscapes: true,
+                processEnvironments: true
+            }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>7 ROI Analysis</h1>
+    
+    <p>We conducted a marginal ROI analysis to assess the incremental effectiveness of each media channel for practical budget optimization decisions. This analysis complements the model coefficient rankings from Section 6 by incorporating current spending levels and saturation effects.</p>
+    
+    <h2>7.1 Methodology</h2>
+    
+    <p>We calculated marginal ROI to assess the incremental return from the next dollar invested in each channel, incorporating saturation effects and current spending levels. This approach provides realistic insights for practical budget allocation decisions, as it evaluates the performance of additional investment rather than complete channel elimination.</p>
+    
+    <div class="formula-box">
+        <p>$$\text{Marginal ROI}_i = \frac{\text{Marginal Sales Impact}_i - \text{€}1}{\text{€}1} \times 100\%$$</p>
+    </div>
+    
+    <p>Additionally, we calculated efficiency scores 0-100 scale that rank channels by their relative performance, normalized to account for different spending levels and market conditions. An efficiency score of 100 represents the highest-performing channel, while 0 indicates the lowest relative performance.</p>
+    
+    <h2>7.2 Results</h2>
+    
+    <p>The analysis reveals clear performance differentiation, with digital channels demonstrating superior efficiency despite minimal budget allocation:</p>
+    
+    <table>
+        <caption><strong>Table 7.1:</strong> Channel Performance Summary</caption>
+        <thead>
+            <tr>
+                <th>Channel</th>
+                <th>Budget Share</th>
+                <th>Marginal ROI</th>
+                <th>Efficiency Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Social Media</td>
+                <td>4.3%</td>
+                <td class="roi-moderate">+19%</td>
+                <td>100/100</td>
+            </tr>
+            <tr>
+                <td>Search Marketing</td>
+                <td>4.4%</td>
+                <td class="roi-moderate">+17%</td>
+                <td>93/100</td>
+            </tr>
+            <tr>
+                <td>Radio Local</td>
+                <td>13.2%</td>
+                <td class="roi-moderate">+15%</td>
+                <td>67/100</td>
+            </tr>
+            <tr>
+                <td>TV Branding</td>
+                <td>39.1%</td>
+                <td class="roi-weak">-3%</td>
+                <td>37/100</td>
+            </tr>
+            <tr>
+                <td>TV Promo</td>
+                <td>22.2%</td>
+                <td class="roi-weak">-5%</td>
+                <td>33/100</td>
+            </tr>
+            <tr>
+                <td>Out-of-Home</td>
+                <td>5.6%</td>
+                <td class="roi-weak">-8%</td>
+                <td>19/100</td>
+            </tr>
+            <tr>
+                <td>Radio National</td>
+                <td>10.5%</td>
+                <td class="roi-weak">-21%</td>
+                <td>0/100</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="figure">
+        <img src="../roi_analysis_clean.png" alt="Marginal ROI Analysis">
+        <p class="figure-caption"><strong>Figure 7.1:</strong> Channel marginal ROI performance left and efficiency versus budget allocation analysis right. Digital channels show strong performance despite minimal budget allocation, while TV channels consume majority budget with negative marginal returns.</p>
+    </div>
+    
+    <h2>7.3 Channel Performance Analysis</h2>
+    
+    <p>The marginal ROI analysis reveals significant performance differentiation across channels, with clear patterns emerging in terms of efficiency and budget allocation:</p>
+    
+    <h3>Top-Performing Channels</h3>
+    <p>Digital channels demonstrate superior performance metrics:</p>
+    <ul>
+        <li><strong>Social Media:</strong> Achieves the highest efficiency score 100/100 with 19% marginal ROI, yet represents only 4.3% of budget allocation</li>
+        <li><strong>Search Marketing:</strong> Strong efficiency score 93/100 with 17% marginal ROI, receiving 4.4% of budget allocation</li>
+        <li><strong>Radio Local:</strong> Moderate efficiency 67/100 with 15% marginal ROI, consuming 13.2% of budget</li>
+    </ul>
+    
+    <h3>Underperforming Channels</h3>
+    <p>Traditional and TV channels show concerning performance indicators:</p>
+    <ul>
+        <li><strong>TV Branding:</strong> Low efficiency 37/100 with negative marginal ROI -3%, yet consumes the largest budget share 39.1%</li>
+        <li><strong>TV Promo:</strong> Lower efficiency 33/100 with negative marginal ROI -5%, representing 22.2% of budget</li>
+        <li><strong>Radio National:</strong> Lowest efficiency 0/100 with significant negative marginal ROI -21%, consuming 10.5% of budget</li>
+        <li><strong>Out-of-Home:</strong> Poor efficiency 19/100 with negative marginal ROI -8%, representing 5.6% of budget</li>
+    </ul>
+    
+    <h2>7.4 Key Strategic Insights</h2>
+    
+    <p>The analysis reveals three fundamental strategic challenges:</p>
+    
+    <ul>
+        <li><strong>Digital Underinvestment:</strong> The highest-performing channels Social Media and Search Marketing with efficiency scores of 100/100 and 93/100 respectively receive only 8.7% of total budget allocation, indicating significant missed opportunities.</li>
+        
+        <li><strong>TV Oversaturation:</strong> TV channels consume 61.3% of budget but deliver negative marginal returns -3% to -5%, indicating that saturation point has been exceeded and additional investment yields diminishing returns.</li>
+        
+        <li><strong>Resource Misallocation:</strong> High-performing channels are significantly under-allocated while underperforming channels consume majority resources, representing a clear optimization opportunity with potential for substantial efficiency gains.</li>
+    </ul>
+    
+    <h2>7.5 Analysis Summary</h2>
+    
+    <p>The marginal ROI analysis provides crucial insights that complement the model coefficient analysis from Section 6. While model coefficients measure direct impact per unit spend, marginal ROI incorporates current spending levels and saturation effects to assess the value of additional investment.</p>
+    
+    <p>This explains why channel rankings differ between sections: Out-of-Home shows strong coefficients but poor marginal ROI due to high current spending levels, while Social Media demonstrates superior marginal efficiency despite moderate coefficients due to minimal current allocation and unsaturated performance potential.</p>
+    
+    <p class="note">
+        <strong>Methodology Note:</strong> Marginal ROI analysis provides directionally accurate insights for budget optimization. Efficiency scores are normalized relative performance metrics 0-100 scale that account for spending levels and market conditions. These findings should guide strategic planning while specific budget adjustments should be tested incrementally with performance monitoring.
+    </p>
+</body>
+</html>

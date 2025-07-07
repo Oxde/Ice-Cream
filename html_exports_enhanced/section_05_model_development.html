@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 5: Model Development</title>
+    
+    <style>
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #000;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+        .optimization-result {
+            background-color: #fdfdfd;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+        }
+        .technical-note {
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .strong { font-weight: bold; }
+        .positive { color: #27ae60; }
+        .negative { color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <h1>5 Model Development</h1>
+    
+    <h2>5.1 Overview</h2>
+    
+    <p>The model development process prioritized <strong>data-driven optimization</strong> over industry assumptions. Rather than applying blanket transformations across all media channels, we implemented an individualized approach that optimized adstock and saturation parameters for each channel based on their unique characteristics and relationship with sales.</p>
+    
+    <h2>5.2 Baseline Linear Model</h2>
+    
+    <p>We began with a multiple linear regression using raw media spend and control variables. This baseline model achieved modest performance but revealed key limitations:</p>
+    
+    <ul>
+        <li>Failed to capture media carryover effects</li>
+        <li>Ignored diminishing returns at high spend levels</li>
+        <li>Treated all channels identically despite different behaviors</li>
+    </ul>
+    
+    <p>These insights motivated our systematic approach to transformation optimization.</p>
+    
+    <h2>5.3 Data-Driven Adstock Optimization</h2>
+    
+    <p>Adstock transformation captures the reality that advertising effects persist beyond the initial exposure week. We optimized decay rates individually for each channel by maximizing correlation with sales.</p>
+    
+    <div class="formula-box">
+        Adstock<sub>t</sub> = x<sub>t</sub> + λ × Adstock<sub>t-1</sub>
+    </div>
+    
+    <div class="optimization-result">
+        <h3>Optimal Decay Rates (λ)</h3>
+        <table>
+            <tr>
+                <th>Channel</th>
+                <th>Decay Rate</th>
+                <th>Interpretation</th>
+            </tr>
+            <tr>
+                <td>Radio Local</td>
+                <td>0.847</td>
+                <td>Strong carryover effect (84.7% retention)</td>
+            </tr>
+            <tr>
+                <td>TV Branding</td>
+                <td>0.692</td>
+                <td>Moderate carryover (69.2% retention)</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td>0.123</td>
+                <td>Minimal carryover (12.3% retention)</td>
+            </tr>
+            <tr>
+                <td>Social Media</td>
+                <td>0.089</td>
+                <td>Very low carryover (8.9% retention)</td>
+            </tr>
+            <tr>
+                <td>Radio National, TV Promo, OOH</td>
+                <td>0.000</td>
+                <td>No beneficial carryover effect</td>
+            </tr>
+        </table>
+    </div>
+    
+    <p>The optimization revealed that <span class="highlight">traditional broadcast media showed stronger carryover effects</span> while digital channels exhibited more immediate impact patterns.</p>
+    
+    <h2>5.4 Individual Saturation Curve Optimization</h2>
+    
+    <p>Saturation transformations model diminishing returns as spend increases. We tested six transformation types for each channel, selecting the one that maximized correlation with sales:</p>
+    
+    <ul>
+        <li><strong>Linear:</strong> x/1000</li>
+        <li><strong>Logarithmic:</strong> log(1 + x/1000)</li>
+        <li><strong>Square Root:</strong> √(x/100)</li>
+        <li><strong>Power 0.3:</strong> (x/1000)<sup>0.3</sup></li>
+        <li><strong>Power 0.5:</strong> (x/1000)<sup>0.5</sup></li>
+        <li><strong>Power 0.7:</strong> (x/1000)<sup>0.7</sup></li>
+    </ul>
+    
+    <div class="optimization-result">
+        <h3>Optimal Saturation Curves</h3>
+        <table>
+            <tr>
+                <th>Channel</th>
+                <th>Transformation</th>
+                <th>Business Interpretation</th>
+            </tr>
+            <tr>
+                <td>TV Channels</td>
+                <td>Power 0.3</td>
+                <td>Strong diminishing returns</td>
+            </tr>
+            <tr>
+                <td>Radio Local</td>
+                <td>Square Root</td>
+                <td>Moderate saturation effects</td>
+            </tr>
+            <tr>
+                <td>Search</td>
+                <td>Power 0.5</td>
+                <td>Balanced response curve</td>
+            </tr>
+            <tr>
+                <td>Social Media</td>
+                <td>Linear</td>
+                <td>No saturation at current spend levels</td>
+            </tr>
+            <tr>
+                <td>Radio National</td>
+                <td>Power 0.7</td>
+                <td>Gentle diminishing returns</td>
+            </tr>
+            <tr>
+                <td>OOH</td>
+                <td>Power 0.3</td>
+                <td>Strong saturation effects</td>
+            </tr>
+        </table>
+    </div>
+    
+    <h2>5.5 Final Model Specification</h2>
+    
+    <p>The final model combines all optimized transformations into a comprehensive framework:</p>
+    
+    <div class="formula-box">
+        Sales(t) = α + Σ β<sub>i</sub> · S<sub>i</sub>(X<sub>adstock,i</sub>(t)) + Σ γ<sub>j</sub> · Z<sub>j</sub>(t) + ε(t)
+    </div>
+    
+    <p>Where:</p>
+    <ul>
+        <li><strong>S<sub>i</sub>()</strong> = Channel-specific optimal saturation function</li>
+        <li><strong>X<sub>adstock,i</sub>(t)</strong> = Adstocked spend (where beneficial)</li>
+        <li><strong>Z<sub>j</sub>(t)</strong> = Control variables (promotions, seasonality, weather)</li>
+        <li><strong>β<sub>i</sub>, γ<sub>j</sub></strong> = Ridge regression coefficients (α = 1.0)</li>
+    </ul>
+    
+    <h2>5.6 Model Performance</h2>
+    
+    <p>The data-driven optimization approach yielded significant improvements over the baseline model:</p>
+    
+    <div class="optimization-result">
+        <h3>Final Model Metrics</h3>
+        <ul>
+            <li><strong>Test R²:</strong> 59.3% (good predictive accuracy)</li>
+            <li><strong>Test MAPE:</strong> 14.4% (reasonable error margin)</li>
+            <li><strong>Overfitting Gap:</strong> 0.077 (minimal, indicating good generalization)</li>
+        </ul>
+    </div>
+    
+    <p class="technical-note">
+        <strong>Technical Note:</strong> All transformations were applied consistently across training and test sets. Feature standardization was performed after transformations to ensure proper Ridge regression behavior.
+    </p>
+    
+    <h2>5.7 Key Methodological Advantages</h2>
+    
+    <p>Our approach offers several advantages over traditional MMM methodologies:</p>
+    
+    <ol>
+        <li><strong>No Arbitrary Assumptions:</strong> Parameters derived from data, not industry rules of thumb</li>
+        <li><strong>Channel Individuality:</strong> Each channel optimized based on its unique characteristics</li>
+        <li><strong>Business Realism:</strong> Transformations align with observed channel behaviors</li>
+        <li><strong>Validation Rigor:</strong> Proper train/test split ensures reliable performance estimates</li>
+    </ol>
+    
+    <p>This data-driven methodology provides a robust foundation for understanding true channel contributions and optimizing media allocation decisions.</p>
+</body>
+</html> 

@@ -53,8 +53,8 @@ print("   • Capture Dutch cultural consumption behaviors")
 # ==========================
 
 # Load the same train/test datasets as 05 baseline for fair comparison
-train_data = pd.read_csv('../data/mmm_ready/consistent_channels_train_set.csv')
-test_data = pd.read_csv('../data/mmm_ready/consistent_channels_test_set.csv')
+train_data = pd.read_csv('data/mmm_ready/consistent_channels_train_set.csv')
+test_data = pd.read_csv('data/mmm_ready/consistent_channels_test_set.csv')
 
 print(f"\n📊 DATASET VALIDATION")
 print("=" * 25)

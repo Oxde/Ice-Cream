@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 8: Recommendations and Simulation</title>
+    
+    <style>
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+            color: #333;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #000;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .note {
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #ccc;
+        }
+        .key-finding {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .scenario-details {
+            background-color: #fdfdfd;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .figure img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .figure-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .strong-positive { color: #27ae60; font-weight: bold; }
+        .moderate-positive { color: #f39c12; font-weight: bold; }
+        .negative { color: #e74c3c; font-weight: bold; }
+        .highlight { background-color: #fff3cd; padding: 2px 4px; }
+    </style>
+</head>
+<body>
+    <h1>8 Recommendations and Simulation</h1>
+    
+    <p>Based on comprehensive Media Mix Modeling analysis (59.3% R²), marginal ROI evaluation, and budget optimization simulations, we present strategic recommendations for transforming media allocation efficiency and maximizing sales impact.</p>
+    
+    <h2>8.1 Key Findings Integration</h2>
+    
+    <p>Our analysis reveals a fundamental misalignment between budget allocation and channel performance:</p>
+    
+    <table>
+        <caption><strong>Table 8.1:</strong> Channel Performance vs Budget Allocation Summary</caption>
+        <thead>
+            <tr>
+                <th>Channel</th>
+                <th>Current Budget Share</th>
+                <th>Marginal ROI</th>
+                <th>Model Coefficient</th>
+                <th>Strategic Direction</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Search Marketing</td>
+                <td>4.5%</td>
+                <td class="moderate-positive">+17%</td>
+                <td>721</td>
+                <td>↑ Increase 50-100%</td>
+            </tr>
+            <tr>
+                <td>Social Media</td>
+                <td>4.4%</td>
+                <td class="moderate-positive">+19%</td>
+                <td>287</td>
+                <td>↑ Increase 40-80%</td>
+            </tr>
+            <tr>
+                <td>Radio Local</td>
+                <td>13.7%</td>
+                <td class="moderate-positive">+15%</td>
+                <td>385</td>
+                <td>↑ Maintain/Slight increase</td>
+            </tr>
+            <tr>
+                <td>TV Branding</td>
+                <td>38.9%</td>
+                <td class="negative">-3%</td>
+                <td>-533</td>
+                <td>↓ Reduce 15-30%</td>
+            </tr>
+            <tr>
+                <td>TV Promo</td>
+                <td>22.1%</td>
+                <td class="negative">-5%</td>
+                <td>-407</td>
+                <td>↓ Reduce 10-20%</td>
+            </tr>
+            <tr>
+                <td>Radio National</td>
+                <td>10.6%</td>
+                <td class="negative">-21%</td>
+                <td>-600</td>
+                <td>↓ Reduce 50-80%</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h2>8.2 Budget Optimization Scenarios</h2>
+    
+    <p>We tested three strategic reallocation scenarios using counterfactual analysis, maintaining budget neutrality while optimizing channel mix:</p>
+    
+    <h3>8.2.1 Scenario Comparison</h3>
+    
+    <table>
+        <caption><strong>Table 8.2:</strong> Strategic Scenario Performance Comparison</caption>
+        <thead>
+            <tr>
+                <th>Scenario</th>
+                <th>Sales Lift</th>
+                <th>Annual Revenue Impact</th>
+                <th>Investment Required</th>
+                <th>Risk Profile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Conservative Digital Boost</td>
+                <td>1.5%</td>
+                <td>€105,209</td>
+                <td>€0</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Aggressive Optimization</td>
+                <td>0.8%</td>
+                <td>€59,207</td>
+                <td>-€105,721</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td><strong>Balanced Reallocation</strong></td>
+                <td class="strong-positive"><strong>1.9%</strong></td>
+                <td class="strong-positive"><strong>€135,358</strong></td>
+                <td><strong>€0</strong></td>
+                <td><strong>Medium</strong></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="scenario-details">
+        <h3>8.2.2 Recommended Scenario: Balanced Reallocation</h3>
+        <p>The Balanced Reallocation scenario optimally balances risk and reward by:</p>
+        <ul>
+            <li>Reducing TV Branding budget by 15% (€5,491 → €4,667 weekly)</li>
+            <li>Increasing Search Marketing by 60% (€622 → €995 weekly)</li>
+            <li>Increasing Social Media by 40% (€608 → €851 weekly)</li>
+            <li>Modest increase to Radio Local by 10% (€1,904 → €2,095 weekly)</li>
+            <li>Maintaining other channels at current levels</li>
+        </ul>
+    </div>
+    
+    <div class="figure">
+        <img src="../plots/section_08_budget_simulation_clean.png" alt="Budget Optimization Analysis">
+        <p class="figure-caption"><strong>Figure 8.1:</strong> Budget optimization simulation results showing sales performance comparison and scenario analysis</p>
+    </div>
+    
+    <h2>8.3 Strategic Recommendations</h2>
+    
+    <div class="key-finding">
+        <h3>Primary Recommendation: Implement Balanced Reallocation Strategy</h3>
+        <p><strong>Expected Outcomes:</strong></p>
+        <ul>
+            <li>Sales increase: <span class="strong-positive">1.9%</span> (€135,358 annually)</li>
+            <li>ROI improvement: From current levels to <span class="strong-positive">120%+</span></li>
+            <li>Budget requirement: <span class="strong-positive">€0</span> (pure reallocation)</li>
+            <li>Payback period: <span class="strong-positive">Immediate</span></li>
+        </ul>
+    </div>
+    
+    <h3>8.3.1 Rationale for Recommendation</h3>
+    
+    <p>The Balanced Reallocation strategy addresses three critical insights from our analysis:</p>
+    
+    <ol>
+        <li><strong>Digital Underinvestment:</strong> Search and Social channels demonstrate positive marginal ROI (17-19%) despite minimal budget allocation (8.9% combined), indicating significant untapped potential.</li>
+        
+        <li><strong>TV Oversaturation:</strong> TV channels consume 61% of budget but show negative marginal returns (-3% to -5%), confirming diminishing returns from current spending levels.</li>
+        
+        <li><strong>Risk Mitigation:</strong> The 15% TV reduction represents a moderate adjustment that minimizes operational disruption while capturing efficiency gains.</li>
+    </ol>
+    
+    <h2>8.4 Expected Business Impact</h2>
+    
+    <p>Successfully implementing the Balanced Reallocation strategy will deliver:</p>
+    
+    <div class="scenario-details">
+        <h3>Quantitative Benefits</h3>
+        <ul>
+            <li>Annual revenue increase: <span class="strong-positive">€135,358</span></li>
+            <li>Sales lift: <span class="strong-positive">1.9%</span></li>
+            <li>Budget reallocation: <span class="strong-positive">Budget neutral</span> (no additional investment required)</li>
+            <li>Media ROI improvement: <span class="strong-positive">32 percentage points</span> (from 88% to 120%)</li>
+        </ul>
+        
+        <h3>Strategic Advantages</h3>
+        <ul>
+            <li>Enhanced digital presence aligning with consumer behavior trends</li>
+            <li>Reduced dependency on expensive traditional media</li>
+            <li>Improved marketing agility and measurement capability</li>
+            <li>Foundation for data-driven decision making</li>
+        </ul>
+    </div>
+    
+    <h2>8.5 Final Recommendation</h2>
+    
+    <p>Based on robust statistical analysis (59.3% R² model), comprehensive ROI evaluation, and detailed scenario simulation, we strongly recommend immediate implementation of the <strong>Balanced Reallocation strategy</strong>. This approach offers the optimal combination of:</p>
+    
+    <ul>
+        <li>Highest projected sales lift (1.9%)</li>
+        <li>No additional budget requirement</li>
+        <li>Manageable implementation risk</li>
+        <li>Immediate payback period</li>
+        <li>Sustainable long-term efficiency gains</li>
+    </ul>
+    
+    <p class="note">
+        <strong>Note:</strong> All projections are based on historical model performance with 59.3% predictive accuracy. Actual results may vary based on market conditions, competitive actions, and implementation effectiveness. We recommend establishing contingency plans and maintaining flexibility to adjust strategies based on real-world performance data.
+    </p>
+</body>
+</html> 

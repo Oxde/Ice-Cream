@@ -1,0 +1,20 @@
+MODEL 11 - FINAL VALIDATION SUMMARY
+==================================================
+
+Model Performance:
+- Test R²: 52.9%
+- MAPE: 6.8%
+- Overfitting gap: 7.9%
+
+Channel ROI Summary:
+- search_cost: 4.5% of budget → +200.0% ROI
+- ooh_ooh_spend: 5.8% of budget → +200.0% ROI
+- radio_total_spend: 24.2% of budget → +88.5% ROI
+- social_costs: 4.4% of budget → +73.5% ROI
+- tv_total_spend: 61.1% of budget → -111.8% ROI
+
+Key Recommendations:
+1. Reduce TV spend from 61% to 35-40%
+2. Increase digital channels from 9% to 25-30%
+3. Maintain radio at current levels
+4. Implement proper test/control periods

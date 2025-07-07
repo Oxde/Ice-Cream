@@ -1,0 +1,30 @@
+ACTUAL MODEL METRICS FOR REPORT
+========================================
+
+Training R²: 0.610 (61.0%)
+Test R²: 0.593 (59.3%)
+Test MAPE: 6.5%
+Test MAE: $8,619
+Overfitting gap: 0.017
+
+RESIDUAL ANALYSIS:
+Mean: $-1,975
+Std: $10,684
+Range: $-19,723 to $20,526
+Shapiro-Wilk p-value: 0.421
+
+TOP 10 FEATURES:
+1. month_cos: -11522.997
+2. month_sin: -6048.834
+3. week_cos: 2023.019
+4. holiday_period: 1889.065
+5. week_sin: 1768.321
+6. weather_temperature_mean: -1606.304
+7. weather_sunshine_duration: 840.642
+8. search_cost_transformed: 720.797
+9. promo_promotion_type: -664.541
+10. radio_national_radio_national_cost_transformed: -600.297
+
+Email features: []
+Total features: 15
+Media features: 7
